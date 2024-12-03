@@ -29,7 +29,6 @@ public class Hooks {
         launchBrowser();
         navigateToUrl(configProps.getProperty("project.url"));
 
-
     }
 
     @AfterTest
@@ -43,13 +42,18 @@ public class Hooks {
      * @Version 1.0
      */
     public void launchBrowser(){
-        if(configProps.getProperty("browser").equalsIgnoreCase("browser")){
+        System.out.println("initiating driver0");
+        if(configProps.getProperty("browser").equalsIgnoreCase("CHROME")){
+            System.out.println("initiating driver1");
             if(configProps.getProperty("browser.chrome.options.headless").equalsIgnoreCase("true")){
                 options.addArguments("--headless");
             }
+            System.out.println("initiating driver2");
             driver = new ChromeDriver(options);
             driver.manage().window().maximize();
         }
+
+        System.out.println("initiating driver12");
 
     }
 
@@ -63,9 +67,16 @@ public class Hooks {
         driver.quit();
     }
 
+    /**
+     * <p>This method is used to navigate to given url</p>
+     * @param url
+     */
+
     public void navigateToUrl(String url){
         driver.get(url);
     }
+
+
 
 
 }

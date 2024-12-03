@@ -4,6 +4,8 @@ import com.automation.zapskiller.utils.UIAutomationUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import static com.automation.zapskiller.config.Hooks.configProps;
+
 public class HomePage extends UIAutomationUtils {
 
     WebDriver driver;
@@ -12,10 +14,11 @@ public class HomePage extends UIAutomationUtils {
         this.driver = driver;
     }
 
-    public By signInButton = By.partialLinkText("http://vistacommerce-qa.rf.gd/login");
+    public By signInButton = By.xpath("//span[text()='Sign in']");
     public By registerLink = By.xpath("//a[contains(text(), 'No account? Create one here')]");
 
     public HomePage clickOnSignIn(){
+
         clickOnElement(this.signInButton);
         return this;
     }

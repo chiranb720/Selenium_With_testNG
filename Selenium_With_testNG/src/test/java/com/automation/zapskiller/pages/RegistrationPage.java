@@ -35,42 +35,42 @@ public class RegistrationPage extends UIAutomationUtils {
         return this;
     }
 
-    public RegistrationPage lastName(String lastName){
+    public RegistrationPage enterLastName(String lastName){
         typeIntoField(this.lastName,lastName);
         return this;
     }
 
-    public RegistrationPage emailId(String emailId){
+    public RegistrationPage enterEmailId(String emailId){
         typeIntoField(this.emailId,emailId);
         return this;
     }
 
-    public RegistrationPage password(String password){
+    public RegistrationPage enterPassword(String password){
         typeIntoField(this.password,password);
         return this;
     }
 
-    public RegistrationPage birthday(String birthday){
+    public RegistrationPage enterBirthday(String birthday){
         typeIntoField(this.birthday,birthday);
         return this;
     }
 
-    public RegistrationPage recieveOfferLetters(){
+    public RegistrationPage clickOnRecieveOfferLetters(){
         clickOnElement(this.recieveOfferLetters);
         return this;
     }
 
-    public RegistrationPage termsAndConditions(){
+    public RegistrationPage clickOnTermsAndConditions(){
         clickOnElement(this.termsAndConditions);
         return this;
     }
 
-    public RegistrationPage customerPrivacy(){
+    public RegistrationPage clickOnCustomerPrivacy(){
         clickOnElement(this.customerPrivacy);
         return this;
     }
 
-    public RegistrationPage saveOption(){
+    public RegistrationPage clickOnSaveOption(){
         clickOnElement(this.saveOption);
         return this;
     }

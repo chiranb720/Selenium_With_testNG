@@ -34,7 +34,7 @@ public class UIAutomationUtils {
     public static Properties readConfig(){
 
         try {
-            FileInputStream fis = new FileInputStream("src/test/resource/config-qa.properties");
+            FileInputStream fis = new FileInputStream("src/test/resources/config-qa.properties");
             Properties props = new Properties();
             props.load(fis);
             return props;
@@ -53,7 +53,7 @@ public class UIAutomationUtils {
             int row = sheet.getLastRowNum();
             int col = sheet.getRow(0).getLastCellNum();
             String[][] data = new String[row][col];
-            for(int i=1;i<row;i++){
+            for(int i=1;i<=row;i++){
                 for(int j=0;j<col;j++){
                     Cell cell = sheet.getRow(i).getCell(j);
                     String cellValue = formatter.formatCellValue(cell);
@@ -86,4 +86,6 @@ public class UIAutomationUtils {
     public void typeIntoField(By element,String inputValue){
         driver.findElement(element).sendKeys(inputValue);
     }
+
+
 }
