@@ -1,12 +1,18 @@
 package com.automation.zapskiller.utils;
 
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -14,6 +20,7 @@ public class UIAutomationUtils {
 
     public static final Logger logger = LoggerFactory.getLogger(UIAutomationUtils.class);
     WebDriver driver;
+    public static FileInputStream fis;
 
     public UIAutomationUtils(WebDriver driver){
         this.driver =driver;
@@ -36,6 +43,29 @@ public class UIAutomationUtils {
         }
     }
 
+    public static String[][] readTestData(String filepath,String tabName){
+
+        try {
+            fis = new FileInputStream(readConfig().getProperty("test.datasource"));
+            DataFormatter formatter = new DataFormatter();
+            Workbook wb = new XSSFWorkbook(fis);
+            Sheet sheet = wb.getSheet(tabName);
+            int row = sheet.getLastRowNum();
+            int col = sheet.getRow(0).getLastCellNum();
+            String[][] data = new String[row][col];
+            for(int i=1;i<row;i++){
+                for(int j=0;j<col;j++){
+                    Cell cell = sheet.getRow(i).getCell(j);
+                    String cellValue = formatter.formatCellValue(cell);
+                    data[i-1][j] = cellValue;
+
+                }
+            }
+            return data;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 
