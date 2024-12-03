@@ -27,6 +27,8 @@ public class Hooks {
     @BeforeTest
     public void beforeTest(){
         launchBrowser();
+        navigateToUrl(configProps.getProperty("project.url"));
+
 
     }
 
@@ -59,6 +61,10 @@ public class Hooks {
     public void closeBrowser(){
 
         driver.quit();
+    }
+
+    public void navigateToUrl(String url){
+        driver.get(url);
     }
 
 
