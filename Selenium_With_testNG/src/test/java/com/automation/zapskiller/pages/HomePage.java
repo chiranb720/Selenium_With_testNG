@@ -19,12 +19,12 @@ public class HomePage extends UIAutomationUtils {
 
     public HomePage clickOnSignIn(){
 
-        clickOnElement(this.signInButton);
+        clickOnElement(this.signInButton,"Sign In button");
         return this;
     }
 
     public HomePage clickOnRegisterLink(){
-        clickOnElement(this.registerLink);
+        clickOnElement(this.registerLink, "Registration link");
         return this;
     }
 

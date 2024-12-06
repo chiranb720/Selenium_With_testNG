@@ -1,20 +1,32 @@
 package com.automation.zapskiller.utils;
 
 
+import com.aventstack.extentreports.Status;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
+
+import static com.automation.zapskiller.config.Hooks.configProps;
+import static com.automation.zapskiller.config.Hooks.wait;
+import static com.automation.zapskiller.reporting.ReportListener.test;
 
 public class UIAutomationUtils {
 
@@ -25,6 +37,7 @@ public class UIAutomationUtils {
     public UIAutomationUtils(WebDriver driver){
         this.driver =driver;
     }
+
 
     /**
      * This method reads a properties/config file and its properties
@@ -67,6 +80,16 @@ public class UIAutomationUtils {
         }
     }
 
+//    /**
+//     * <p>Waits for Visibility of WebElement for configured number of seconds</p>
+//     * @param locator
+//     * @Version 1.0
+//     */
+//    public void waitForElementVisibility(By locator) {
+//        wait = new WebDriverWait(driver, Duration.ofSeconds(Long.parseLong(configProps.getProperty("webdriver.wait.inseconds"))));
+//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(locator)));
+//    }
+
 
 
     /**
@@ -74,8 +97,15 @@ public class UIAutomationUtils {
      * @param element
      * @Version 1.0
      */
-    public void clickOnElement(By element){
-        driver.findElement(element).click();
+    public void clickOnElement(By element,String elementName){
+        try {
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated(element)).click();
+            test.log(Status.INFO,"Clicking on element "+elementName);
+        }catch(Exception e){
+            test.log(Status.FAIL,"Unable to click on element "+elementName);
+            Assert.fail();
+        }
     }
 
     /**
@@ -84,7 +114,12 @@ public class UIAutomationUtils {
      * @param inputValue
      */
     public void typeIntoField(By element,String inputValue){
-        driver.findElement(element).sendKeys(inputValue);
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(element)).sendKeys(inputValue);
+            test.log(Status.INFO,"Entering value Into input box "+inputValue);
+        }catch(Exception e){
+            test.log(Status.FAIL,"Unable to enter values in the input box");
+        }
     }
 
 

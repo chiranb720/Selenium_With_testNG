@@ -20,13 +20,13 @@ public class RegistrationPage extends UIAutomationUtils {
     public By emailId = By.id("field-email");
     public By password = By.id("field-password");
     public By birthday = By.id("field-birthday");
-    public By recieveOfferLetters = By.name("optin");
+    public By recieveOfferLetters = By.xpath("//input[@name='optin']");
     public By termsAndConditions = By.name("psgdpr");
     public By customerPrivacy = By.name("customer_privacy");
     public By saveOption = By.xpath("//button[contains(text(),'Save')]");
 
     public RegistrationPage clickOnSocialTitle(){
-        clickOnElement(this.socialTitle);
+        clickOnElement(this.socialTitle,"Social Title");
         return this;
     }
 
@@ -56,22 +56,22 @@ public class RegistrationPage extends UIAutomationUtils {
     }
 
     public RegistrationPage clickOnRecieveOfferLetters(){
-        clickOnElement(this.recieveOfferLetters);
+        clickOnElement(this.recieveOfferLetters, "Recieve Offer Letters");
         return this;
     }
 
     public RegistrationPage clickOnTermsAndConditions(){
-        clickOnElement(this.termsAndConditions);
+        clickOnElement(this.termsAndConditions,"Terms And Condition");
         return this;
     }
 
     public RegistrationPage clickOnCustomerPrivacy(){
-        clickOnElement(this.customerPrivacy);
+        clickOnElement(this.customerPrivacy,"Customer Privacy");
         return this;
     }
 
     public RegistrationPage clickOnSaveOption(){
-        clickOnElement(this.saveOption);
+        clickOnElement(this.saveOption,"Save Option");
         return this;
     }
 

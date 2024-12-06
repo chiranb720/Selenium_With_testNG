@@ -22,6 +22,7 @@ public class ReportListener implements ITestListener {
     public void onTestStart(ITestResult result) {
         test = extentReports.createTest(result.getMethod().getMethodName()+" started");
 
+
     }
 
     @Override
@@ -52,6 +53,7 @@ public class ReportListener implements ITestListener {
     @Override
     public void onStart(ITestContext context) {
         reporter = new ExtentSparkReporter(configProps.getProperty("reporting.location"));
+        System.out.println(configProps.getProperty("reporting.location"));
         extentReports.attachReporter(reporter);
         reporter.config(ExtentSparkReporterConfig.builder()
                 .documentTitle(configProps.getProperty("report.title"))
@@ -63,5 +65,6 @@ public class ReportListener implements ITestListener {
     public void onFinish(ITestContext context) {
         test.log(Status.INFO, "Test Suite "+context.getSuite().getName()+" Completed");
         extentReports.flush();
+
     }
 }
